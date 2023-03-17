@@ -24,7 +24,7 @@ echo "tst" > /etc/spotnik/network
 
 # gestion des annonces vocales 
 rm /usr/share/svxlink/sounds/fr_FR/PropagationMonitor/name.wav
-ln -s /usr/share/svxlink/sounds/fr_FR/RRF/Sara.wav /usr/share/svxlink/sounds/fr_FR/PropagationMonitor/name.wav
+ln -s /usr/share/svxlink/sounds/fr_FR/RRF/Stst.wav /usr/share/svxlink/sounds/fr_FR/PropagationMonitor/name.wav
 
 # creation du svxlink.ara
 rm -f /etc/spotnik/svxlink.tst
