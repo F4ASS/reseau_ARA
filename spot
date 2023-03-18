@@ -1,0 +1,140 @@
+#!/bin/bash
+# MENU DE SELECTION POUR Spotnik-4.0
+#
+#  F5NLG  01/06/2020
+#  Update F4ASS 18/03/2023
+
+while : ; do
+
+MENULIST=(
+1 " Restart Spotnik on Stand Alone '95'" \
+2 " Restart Spotnik on RRF '96'" \
+3 " Restart Spotnik on FON Room '97'" \
+4 " Restart Spotnik on TEC Room '98'" \
+5 " Restart Spotnik on INT Room '99'" \
+6 " Restart Spotnik on BAV Room '100'" \
+7 " Restart Spotnik on LOC Room '101'" \
+8 " Restart Spotnik on EXP Room '102'" \
+9 " Restart Spotnik on EchoLink '103'" \
+10 " Restart Spotnik on REG Room '104'" \
+11 " Restart Spotnik on Xwindow Digital '105'" \
+12 " Restart Spotnik on C4FM/P25/NXDN/DMR '106'" \
+13 " Restart Spotnik on Urgence FrEmCom '112'" \
+14 " Restart Spotnik on Auvergne Rhone Alpes '272'" \
+15 " Restart Spotnik on Salon de test '878'" \
+16 " See Spotnik working (Logs) 'ctrl c'to leave" \
+17 " Configure Wifi or network" \
+18 " Trim Sound Alsamixer" \
+19 " Edit Svxlink.cfg for all reflectors" \
+20 " Edit Svxlink.el for EchoLink." \
+21 " Edit ModuleEchoLink.conf" \
+22 " Edit Logic.tcl (Dangerous)" \
+23 " MC Midnight Commander" \
+24 " Configure Dwagent " \
+25 " Start / stop RRFRaptor !" \
+26 " Enable Numeric mode on Boot" \
+27 " Disable Numeric mode on Boot"
+)
+# nbre de ligne / colonne / ascenseur ?
+choix=$(whiptail --title "- Spotnik 4.0 Menu -"  --menu "                  >> Make your Choice: " 35 60 25 \
+"${MENULIST[@]}" \
+3>&1 1>&2 2>&3)
+
+exitstatus=$?
+
+#on recupere ce choix
+#exitstatus=$?
+if [ $exitstatus = 0 ]; then
+    echo "Your chosen option:" $choix
+else
+    echo "You chose Cancel."; break;
+fi
+
+# case : action en fonction du choix
+
+case $choix in
+
+1)
+/etc/spotnik/restart.default ;;
+
+2)
+/etc/spotnik/restart.rrf ;;
+
+3)
+/etc/spotnik/restart.fon ;;
+
+4)
+/etc/spotnik/restart.tec ;;
+
+5)
+/etc/spotnik/restart.int ;;
+
+6)
+/etc/spotnik/restart.bav ;;
+
+7)
+/etc/spotnik/restart.loc ;;
+
+8)
+/etc/spotnik/restart.exp ;;
+
+9)
+/etc/spotnik/restart.el ;;
+
+10)
+/etc/spotnik/restart.reg ;;
+
+11)
+/etc/spotnik/restart.fdv ;;
+
+12)
+/etc/spotnik/restart.num ;;
+
+13)
+/etc/spotnik/restart.frm ;;
+
+14)
+/etc/spotnik/restart.ara ;;
+
+15)
+/etc/spotnik/restart.tst ;;
+
+16)
+/etc/spotnik/view_svx ;;
+
+17)
+nmtui ;;
+
+18)
+alsamixer -c1 -V all && alsactl store ;;
+
+19)
+mcedit /etc/spotnik/svxlink.cfg ;;
+
+20)
+mcedit /etc/spotnik/svxlink.el ;;
+
+21)
+mcedit /etc/spotnik/svxlink.d/ModuleEchoLink.conf ;;
+
+22)
+mcedit /usr/share/svxlink/events.d/local/Logic.tcl ;;
+
+23)
+mc /etc/spotnik ;;
+
+24)
+sh /usr/share/dwagent/native/configure ;;
+
+25)
+sh /opt/RRFRaptor/RRFRaptor.sh ;;
+
+26)
+/etc/spotnik/num.sh enable ;;
+
+27)
+/etc/spotnik/num.sh disable
+
+esac
+done
+exit 0
