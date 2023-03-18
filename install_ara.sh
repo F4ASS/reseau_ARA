@@ -1,5 +1,7 @@
 #!/bin/sh
 mv restart.* /etc/spotnik/
+mv spot /usr/bin/
+chmod +x /usr/bin/spot
 chmod +x /etc/spotnik/restart.*
 mv modede*.* /etc/spotnik/
 chmod +x /etc/spotnik/modedeffrm.py
